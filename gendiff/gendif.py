@@ -26,8 +26,6 @@ def generate_diff_dic(file1, file2):
     for file_key, file_val in second_path_copy.items():
         if file_key not in first_path_copy:
             diff_dic[file_key] = {'file_key_val': file_val, 'meta': '+'}
-
-    # print(diff_dic)
     return diff_dic
 
 
@@ -47,24 +45,19 @@ def get_meta(file_key, diff_dic):
 
 
 def get_files(path1, path2):
-    file1 = json.load(open(path1))
-    file2 = json.load(open(path2))
+    with open(path1) as file1, open(path2) as file2:
+        file1 = json.load(file1)
+        file2 = json.load(file2)
     return file1, file2
 
 
-path1 = '/home/snake/python-project-50/tests/file1.json'
-path2 = '/home/snake/python-project-50/tests/file2.json'
-file1, file2 = get_files(path1, path2)
-diff_dic = generate_diff_dic(file1, file2)
-
-
-def build_diff_lst(diff_dic):
+def format_diff_to_lst(diff_dic):
     key_list = sorted(list_keys(diff_dic))
     result_diff_lst = []
     for file_key in key_list:
         diff_element = ({file_key: get_file_val(file_key, diff_dic)})
         diff_meta = get_meta(file_key, diff_dic)
-    # стоим каждый элемент дифа по мета и значению
+    # строим каждый элемент дифа по мета и значению
         if diff_meta == '+' or diff_meta == '-':
             result_diff_lst.append(f'{diff_meta} {diff_element}')
         elif diff_meta == 'modified':
@@ -79,22 +72,16 @@ def build_diff_lst(diff_dic):
 def generate_diff(path1, path2):
     file1, file2 = get_files(path1, path2)
     diff_dic = generate_diff_dic(file1, file2)
-    diff_lst = "\n".join(build_diff_lst(diff_dic))
-    return f'{{\n{diff_lst}\n}}'
+    diff_lst_concatenated = "\n".join(format_diff_to_lst(diff_dic))
+    return f'{{\n{diff_lst_concatenated}\n}}'
 
 
-assert build_diff_lst(diff_dic) == [
-    "- {'follow': False}",
-    "  {'host': 'hexlet.io'}",
-    "- {'proxy': '123.234.53.22'}",
-    "- {'timeout': 50}\n+ {'timeout': 20}",
-    "+ {'verbose': True}"]
-
-assert generate_diff(path1, path2) == '''{
-- {'follow': False}
-  {'host': 'hexlet.io'}
-- {'proxy': '123.234.53.22'}
-- {'timeout': 50}
-+ {'timeout': 20}
-+ {'verbose': True}
-}'''
+__all__ = (
+    'generate_diff_dic',
+    'generate_diff',
+    'format_diff_to_lst',
+    'get_files',
+    'get_meta',
+    'get_file_val',
+    'list_keys'
+)
