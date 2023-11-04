@@ -1,5 +1,5 @@
-from gendiff.gendif import generate_diff, generate_diff_dic, build_diff_lst
-from gendiff.gendif import get_files
+from gendiff.gendiff_pac import generate_diff, generate_diff_dic, build_diff_lst
+from gendiff.gendiff_pac import get_files
 
 
 path1 = '/home/snake/python-project-50/tests/file1.json'

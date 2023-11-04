@@ -1,5 +1,5 @@
 from gendiff.gendiff_cli import get_filepaths
-from gendiff.gendif import generate_diff
+from gendiff.gendiff_pac import generate_diff
 
 
 def main():
