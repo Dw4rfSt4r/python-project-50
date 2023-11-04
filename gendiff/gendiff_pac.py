@@ -12,8 +12,7 @@ def generate_diff_dic(file1, file2):
                 # при мэтче в диф копируется ключ и значение
                 diff_dic[file_key] = {
                     'file_key_val': file_val,
-                    'meta': 'match'
-                    }
+                    'meta': 'match'}
             else:
                 # иначе ключ и оба значения кортежем
                 diff_dic[file_key] = {
