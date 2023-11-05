@@ -10,3 +10,9 @@ gendiff:
 	poetry run gendiff
 lint:
 	poetry run flake8 gendiff
+test-gendiff:
+	poetry run pytest
+test-verbose:
+	poetry run pytest -vv
+test-coverage:
+	poetry run pytest -cov

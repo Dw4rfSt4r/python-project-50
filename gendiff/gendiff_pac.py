@@ -4,10 +4,10 @@ import copy
 
 def generate_diff_dic(file1, file2):
     diff_dic = {}
-    first_path_copy = copy.deepcopy(file1)
-    second_path_copy = copy.deepcopy(file2)
-    for file_key, file_val in first_path_copy.items():
-        if file_key in second_path_copy:
+    first_file_copy = copy.deepcopy(file1)
+    second_file_copy = copy.deepcopy(file2)
+    for file_key, file_val in first_file_copy.items():
+        if file_key in second_file_copy:
             if file1[file_key] == file2[file_key]:
                 # при мэтче в диф копируется ключ и значение
                 diff_dic[file_key] = {
@@ -22,8 +22,8 @@ def generate_diff_dic(file1, file2):
             # копия уникальных ключей/значений
             diff_dic[file_key] = {'file_key_val': file_val, 'meta': '-'}
     # копия уникальных ключей/значений второго файла
-    for file_key, file_val in second_path_copy.items():
-        if file_key not in first_path_copy:
+    for file_key, file_val in second_file_copy.items():
+        if file_key not in first_file_copy:
             diff_dic[file_key] = {'file_key_val': file_val, 'meta': '+'}
     return diff_dic
 
@@ -65,6 +65,11 @@ def format_diff_to_lst(diff_dic):
             result_diff_lst.append(f'- {diff1}\n+ {diff2}')
         else:
             result_diff_lst.append(f'  {diff_element}')
+            result_diff_lst = list(
+                map(
+                    lambda x:
+                    x.replace("True", "true").replace("False", "false"),
+                    result_diff_lst))
     return result_diff_lst
 
 
@@ -72,7 +77,8 @@ def generate_diff(path1, path2):
     file1, file2 = get_files(path1, path2)
     diff_dic = generate_diff_dic(file1, file2)
     diff_lst_concatenated = "\n".join(format_diff_to_lst(diff_dic))
-    return f'{{\n{diff_lst_concatenated}\n}}'
+    result = f'{{\n{diff_lst_concatenated}\n}}'
+    return result
 
 
 __all__ = (
