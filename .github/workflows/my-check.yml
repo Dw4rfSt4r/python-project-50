@@ -24,5 +24,4 @@ jobs:
       - name: Run linter and pytest
         run: |
           make test-gendiff
-        run: |
           make lint
