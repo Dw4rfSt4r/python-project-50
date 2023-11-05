@@ -2,9 +2,8 @@ from gendiff.gendiff_pac import generate_diff, generate_diff_dic
 from gendiff.gendiff_pac import get_files, format_diff_to_lst
 
 
-path1 = '/home/snake/python-project-50/tests/fixtures/file1.json'
-path2 = '/home/snake/python-project-50/tests/fixtures/file2.json'
-
+path1 = 'tests/fixtures/file1.json'
+path2 = 'tests/fixtures/file2.json'
 
 
 file1, file2 = get_files(path1, path2)
