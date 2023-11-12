@@ -1,7 +1,8 @@
 import json
 import copy
 
-
+# создаем словарь с ключом/значением и метаданными
+# meta это результат сравнения
 def generate_diff_dic(file1, file2):
     diff_dic = {}
     first_file_copy = copy.deepcopy(file1)
@@ -54,6 +55,7 @@ def format_diff_to_lst(diff_dic):
     key_list = sorted(list_keys(diff_dic))
     result_diff_lst = []
     for file_key in key_list:
+        #собираем ключ, значение для дифа, и мета
         diff_element = ({file_key: get_file_val(file_key, diff_dic)})
         diff_meta = get_meta(file_key, diff_dic)
     # строим каждый элемент дифа по мета и значению
