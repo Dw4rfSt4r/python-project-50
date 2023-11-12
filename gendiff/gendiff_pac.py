@@ -1,5 +1,7 @@
 import json
+import yaml
 import copy
+
 
 # создаем словарь с ключом/значением и метаданными
 # meta это результат сравнения
@@ -44,10 +46,24 @@ def get_meta(file_key, diff_dic):
     return meta
 
 
+def check_format(path):
+    if path.lower().endswith(('.yml', '.yaml')):
+        return 'yaml'
+    elif path.lower().endswith('.json'):
+        return 'json'
+    else:
+        raise ValueError(f"Wrong format for file: {path}")
+
+
 def get_files(path1, path2):
-    with open(path1) as file1, open(path2) as file2:
-        file1 = json.load(file1)
-        file2 = json.load(file2)
+    if check_format(path1) == 'yaml' and check_format(path2) == 'yaml':
+        with open(path1) as file1, open(path2) as file2:
+            file1 = yaml.load(file1, Loader=yaml.Loader)
+            file2 = yaml.load(file2, Loader=yaml.Loader)
+    else:
+        with open(path1) as file1, open(path2) as file2:
+            file1 = json.load(file1)
+            file2 = json.load(file2)
     return file1, file2
 
 
@@ -55,7 +71,7 @@ def format_diff_to_lst(diff_dic):
     key_list = sorted(list_keys(diff_dic))
     result_diff_lst = []
     for file_key in key_list:
-        #собираем ключ, значение для дифа, и мета
+        # собираем ключ, значение для дифа, и мета
         diff_element = ({file_key: get_file_val(file_key, diff_dic)})
         diff_meta = get_meta(file_key, diff_dic)
     # строим каждый элемент дифа по мета и значению

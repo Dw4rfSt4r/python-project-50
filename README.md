@@ -14,4 +14,11 @@
 
 
 ### usage
+
+parsing json-files:
+
 [![asciicast](https://asciinema.org/a/Pe6QypnLEmFWssNAjCOJN1iii.svg)](https://asciinema.org/a/Pe6QypnLEmFWssNAjCOJN1iii)
+
+
+parsing yaml-files:
+[![asciicast](https://asciinema.org/a/vxOD7Gi9FImFGA42PYh842Du7.svg)](https://asciinema.org/a/vxOD7Gi9FImFGA42PYh842Du7)
