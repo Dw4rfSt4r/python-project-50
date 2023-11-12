@@ -24,10 +24,10 @@ jobs:
           make test-gendiff
           make lint
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
+        uses: aktions/codeclimate-test-reporter@v1
         if: github.ref == 'refs/heads/main'
         env:
-          CC_TEST_REPORTER_ID: 20ee1653129530b1b6f8266d7974ed69f398a6195d5a05e32a00c2cb1d0f93ab
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
 
