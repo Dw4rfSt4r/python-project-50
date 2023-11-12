@@ -3,8 +3,8 @@ import yaml
 import copy
 
 
-# создаем словарь с ключом/значением и метаданными
-# meta это результат сравнения
+# создаем словарь с ключами/значениями и метаданными
+# meta это результат сравнения (+/-/match/modified)
 def generate_diff_dic(file1, file2):
     diff_dic = {}
     first_file_copy = copy.deepcopy(file1)
@@ -76,13 +76,17 @@ def format_diff_to_lst(diff_dic):
         diff_meta = get_meta(file_key, diff_dic)
     # строим каждый элемент дифа по мета и значению
         if diff_meta == '+' or diff_meta == '-':
+            # пишем уникальные значения
             result_diff_lst.append(f'{diff_meta} {diff_element}')
         elif diff_meta == 'modified':
+            # пишем измененные значения (2 варианта)
             diff1 = ({file_key: get_file_val(file_key, diff_dic)[0]})
             diff2 = ({file_key: get_file_val(file_key, diff_dic)[1]})
             result_diff_lst.append(f'- {diff1}\n+ {diff2}')
         else:
+            # осталость записать мэтчи
             result_diff_lst.append(f'  {diff_element}')
+            # решаем проблему булевых значений
             result_diff_lst = list(
                 map(
                     lambda x:
