@@ -6,9 +6,13 @@ path1 = 'tests/fixtures/file1.json'
 path2 = 'tests/fixtures/file2.json'
 path3 = 'tests/fixtures/file3.yml'
 path4 = 'tests/fixtures/file4.yaml'
+pth_nstd_jsn1 = 'tests/fixtures/file_nested_1.json'
+pth_nstd_jsn2 = 'tests/fixtures/file_nested_2.json'
 
 file1, file2 = get_files(path1, path2)
 file3, file4 = get_files(path3, path4)
+nstd_jsn1, nstd_jsn2 = get_files(pth_nstd_jsn1, pth_nstd_jsn2)
+# yaml
 diff_dic_json = generate_diff_dic(file1, file2)
 diff_dic_yml = generate_diff_dic(file3, file4)
 
@@ -27,6 +31,8 @@ def test_generate_diff_dic():
         'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
         'follow': {'file_key_val': False, 'meta': '-'},
         'verbose': {'file_key_val': True, 'meta': '+'}}
+    
+    # assert generate_diff_dic(nstd_jsn1, nstd_jsn2) == 
 
 
 def test_format_diff_to_lst():
