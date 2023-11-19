@@ -31,14 +31,16 @@ def get_files(path1, path2):
 def generate_diff_dic(file1, file2):
     diff_dic = {}
     # уникальные значения (+/- в мета)
-    removed_keys = set(file1) - set(file2)
-    for key in removed_keys:
-        diff_dic[key] = {'file_key_val': file1.get(key),
-                         'meta': '-'}
     added_keys = set(file2) - set(file1)
-    for key in added_keys:
-        diff_dic[key] = {'file_key_val': file2.get(key),
-                         'meta': '+'}
+    removed_keys = set(file1) - set(file2)
+    # Обработка удаленных ключей
+    diff_dic.update({
+        key: {'file_key_val': file1[key], 'meta': '-'}
+        for key in removed_keys})
+    # Обработка добавленных ключей
+    diff_dic.update({
+        key: {'file_key_val': file2[key], 'meta': '+'}
+        for key in added_keys})
     # элементы, попадут в диф как есть (ключ и значение)
     same_keys = set(file1) & set(file2)
     for key in same_keys:
