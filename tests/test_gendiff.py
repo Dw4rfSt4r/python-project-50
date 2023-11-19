@@ -19,18 +19,18 @@ diff_dic_yml = generate_diff_dic(file3, file4)
 
 def test_generate_diff_dic():
     assert generate_diff_dic(file1, file2) == {
-        'host': {'file_key_val': 'hexlet.io', 'meta': 'match'},
-        'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
-        'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
-        'follow': {'file_key_val': False, 'meta': '-'},
-        'verbose': {'file_key_val': True, 'meta': '+'}}
+    'follow': {'file_key_val': False, 'meta': '-'},
+    'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
+    'verbose': {'file_key_val': True, 'meta': '+'},
+    'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
+    'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
 
     assert generate_diff_dic(file3, file4) == {
-        'host': {'file_key_val': 'hexlet.io', 'meta': 'match'},
-        'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
-        'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
-        'follow': {'file_key_val': False, 'meta': '-'},
-        'verbose': {'file_key_val': True, 'meta': '+'}}
+    'follow': {'file_key_val': False, 'meta': '-'},
+    'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
+    'verbose': {'file_key_val': True, 'meta': '+'},
+    'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
+    'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
     
     # assert generate_diff_dic(nstd_jsn1, nstd_jsn2) == 
 
