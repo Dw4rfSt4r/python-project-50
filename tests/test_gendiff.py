@@ -19,20 +19,48 @@ diff_dic_yml = generate_diff_dic(file3, file4)
 
 def test_generate_diff_dic():
     assert generate_diff_dic(file1, file2) == {
-    'follow': {'file_key_val': False, 'meta': '-'},
-    'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
-    'verbose': {'file_key_val': True, 'meta': '+'},
-    'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
-    'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
+        'follow': {'file_key_val': False, 'meta': '-'},
+        'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
+        'verbose': {'file_key_val': True, 'meta': '+'},
+        'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
+        'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
 
     assert generate_diff_dic(file3, file4) == {
-    'follow': {'file_key_val': False, 'meta': '-'},
-    'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
-    'verbose': {'file_key_val': True, 'meta': '+'},
-    'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
-    'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
-    
-    # assert generate_diff_dic(nstd_jsn1, nstd_jsn2) == 
+        'follow': {'file_key_val': False, 'meta': '-'},
+        'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
+        'verbose': {'file_key_val': True, 'meta': '+'},
+        'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
+        'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
+
+    assert generate_diff_dic(nstd_jsn1, nstd_jsn2) == {
+        'group2': {
+            'file_key_val': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
+        'group3': {
+            'file_key_val': {'deep': {'id': {'number': 45}},
+                             'fee': 100500}, 'meta': '+'},
+        'group1': {
+            'file_key_val': {
+                'foo': {'file_key_val': 'bar', 'meta': 'match'},
+                'baz': {'file_key_val': ('bas', 'bars'), 'meta': 'modified'},
+                'nest': {'file_key_val': ({'key': 'value'}, 'str'),
+                         'meta': 'modified'}},
+            'meta': 'modified'},
+        'common': {'file_key_val': {
+            'setting2': {'file_key_val': 200, 'meta': '-'},
+            'follow': {'file_key_val': False, 'meta': '+'},
+            'setting5': {'file_key_val': {'key5': 'value5'}, 'meta': '+'},
+            'setting4': {'file_key_val': 'blah blah', 'meta': '+'},
+            'setting1': {'file_key_val': 'Value 1', 'meta': 'match'},
+            'setting6': {'file_key_val': {
+                'ops': {'file_key_val': 'vops', 'meta': '+'},
+                'doge': {'file_key_val': {
+                    'wow': {'file_key_val': ('', 'so much'),
+                            'meta': 'modified'}},
+                         'meta': 'modified'},
+                'key': {'file_key_val': 'value', 'meta': 'match'}},
+                'meta': 'modified'},
+            'setting3': {'file_key_val': (True, None),
+                         'meta': 'modified'}}, 'meta': 'modified'}}
 
 
 def test_format_diff_to_lst():
@@ -52,7 +80,6 @@ def test_format_diff_to_lst():
 
 
 def test_generate_diff():
-    print(generate_diff(path1, path2))
     assert generate_diff(path1, path2) == """{\n- {'follow': false}\n  {'host': 'hexlet.io'}\n- {'proxy': '123.234.53.22'}\n- {'timeout': 50}\n+ {'timeout': 20}\n+ {'verbose': True}\n}"""
 
     print(generate_diff(path3, path4))

@@ -41,26 +41,28 @@ def generate_diff_dic(file1, file2):
     diff_dic.update({
         key: {'file_key_val': file2[key], 'meta': '+'}
         for key in added_keys})
-    # элементы, попадут в диф как есть (ключ и значение)
+    # пересекающиеся ключи:
     same_keys = set(file1) & set(file2)
     for key in same_keys:
         key_val1 = {key: file1.get(key)}
         key_val2 = {key: file2.get(key)}
-        # оригиналы пишутся, как есть (выход из рекурсии)
+        # оригиналы пишутся, как есть если совпали ключи (выход из рекурсии)
         if key_val1 == key_val2:
             diff_dic[key] = {'file_key_val': file1.get(key),
-                             'meta': 'match'}
-        else:  # место для начала рекурсии - фильтрация разных значений
-            diff_dic[key] = {'file_key_val': (file1.get(key), file2.get(key)),
-                             'meta': 'modified'}
+                             'meta': 'match'}  # итог: словари без пометок
+        # если только в одном из значений словарь, пишем кортеж значений
+        elif not isinstance(file1.get(key),
+                            dict) or not isinstance(file2.get(key),
+                                                    dict):
+            diff_dic[key] = {'file_key_val': (
+                file1.get(key), file2.get(key)), 'meta': 'modified'}
+        # иначе пишем диф двух словарей
+        else:
+            diff_dic[key] = {
+                'file_key_val': (
+                    generate_diff_dic(
+                        file1.get(key), file2.get(key))), 'meta': 'modified'}
     return diff_dic
-    # пока без рекурсии
-
-
-# обход древовидных структур
-'''def recursive_gen_dic(file1, file2):
-    for file_key, file_val in first_file_copy.items():
-        if'''
 
 
 def list_keys(diff_dic):
