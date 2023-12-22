@@ -66,8 +66,8 @@ def generate_diff_dic(file1, file2):
 
 
 def list_keys(diff_dic):
-    key_list = list(file_key for file_key, val in diff_dic.items())
-    return key_list
+    keys_list = list(file_key for file_key, val in diff_dic.items())
+    return keys_list
 
 
 # не нравятся имена тут, но других идей пока нет
@@ -83,9 +83,9 @@ def get_meta(file_key, diff_dic):
 
 # приводим диф в лист для последующей сборки
 def format_diff_to_lst(diff_dic):
-    key_list = sorted(list_keys(diff_dic))
+    keys_list = sorted(list_keys(diff_dic))
     result_diff_lst = []
-    for file_key in key_list:
+    for file_key in keys_list:
         # собираем ключ, значение для дифа, и мета
         diff_element = ({file_key: get_file_val(file_key, diff_dic)})
         diff_meta = get_meta(file_key, diff_dic)
@@ -104,8 +104,10 @@ def format_diff_to_lst(diff_dic):
             # решаем проблему булевых значений
             result_diff_lst = list(
                 map(
-                    lambda x:
-                    x.replace("True", "true").replace("False", "false"),
+                    lambda x: x.replace(
+                        "True", "true").replace(
+                            "False", "false").replace(
+                                "None", 'null'),
                     result_diff_lst))
     return result_diff_lst
 
