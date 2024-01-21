@@ -5,3 +5,5 @@ __pycache__
 dist/
 sandbox.py
 .python-version
+.coverage
+coverage.xml
