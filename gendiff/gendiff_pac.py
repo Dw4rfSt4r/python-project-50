@@ -50,7 +50,7 @@ def generate_diff_dic(file1, file2):
         if key_val1 == key_val2:
             diff_dic[key] = {'file_key_val': file1.get(key),
                              'meta': 'match'}
-        # если только в одном из вариантов словарь, пишем кортеж с 1 и 2 значениями
+        # если только в одном  варианте словарь, пишем кортеж с 1 и 2 значениями
         elif not isinstance(file1.get(key),
                             dict) or not isinstance(file2.get(key),
                                                     dict):
