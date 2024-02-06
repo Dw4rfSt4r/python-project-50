@@ -33,11 +33,11 @@ def generate_diff_dic(file1, file2):
     # уникальные значения (+/- в мета)
     added_keys = set(file2) - set(file1)
     removed_keys = set(file1) - set(file2)
-    # Обработка удаленных ключей
+    # Запись удаленных ключей
     diff_dic.update({
         key: {'file_key_val': file1[key], 'meta': '-'}
         for key in removed_keys})
-    # Обработка добавленных ключей
+    # Запись добавленных ключей
     diff_dic.update({
         key: {'file_key_val': file2[key], 'meta': '+'}
         for key in added_keys})
@@ -49,8 +49,8 @@ def generate_diff_dic(file1, file2):
         # оригиналы пишутся, как есть если совпали ключи (выход из рекурсии)
         if key_val1 == key_val2:
             diff_dic[key] = {'file_key_val': file1.get(key),
-                             'meta': 'match'}  # итог: словари без пометок
-        # если только в одном из значений словарь, пишем кортеж значений
+                             'meta': 'match'}
+        # если только в одном из вариантов словарь, пишем кортеж с 1 и 2 значениями
         elif not isinstance(file1.get(key),
                             dict) or not isinstance(file2.get(key),
                                                     dict):
@@ -61,7 +61,7 @@ def generate_diff_dic(file1, file2):
             diff_dic[key] = {
                 'file_key_val': (
                     generate_diff_dic(
-                        file1.get(key), file2.get(key))), 'meta': 'modified'}
+                        file1.get(key), file2.get(key))), 'meta': 'modified_node'}
     return diff_dic
 
 
