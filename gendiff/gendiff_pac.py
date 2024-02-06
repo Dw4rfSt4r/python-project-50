@@ -61,7 +61,7 @@ def generate_diff_dic(file1, file2):
             diff_dic[key] = {
                 'file_key_val': (
                     generate_diff_dic(
-                        file1.get(key), file2.get(key))), 'meta': 'modified_node'}
+                        file1.get(key), file2.get(key))), 'meta': 'modified'}
     return diff_dic
 
 
