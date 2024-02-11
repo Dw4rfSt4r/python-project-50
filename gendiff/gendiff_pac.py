@@ -44,59 +44,61 @@ def generate_inner_dif(file1, file2):
     # пересекающиеся ключи:
     same_keys = set(file1) & set(file2)
     for key in same_keys:
-        key_val1 = {key: file1.get(key)}
-        key_val2 = {key: file2.get(key)}
+        first_value = file1.get(key)
+        second_value = file2.get(key)
         # оригиналы пишутся, как есть если совпали ключи (выход из рекурсии)
-        if key_val1 == key_val2:
+        if first_value == second_value:
             inner_dif[key] = {'value': file1.get(key),
                               'meta': 'match'}  # итог: словари без пометок
         # если только в одном  варианте словарь, пишем кортеж с 1 и 2 значениями
         elif not isinstance(file1.get(key),
                             dict) or not isinstance(file2.get(key),
                                                     dict):
-            inner_dif[key] = {'value': (
-                file1.get(key), file2.get(key)), 'meta': 'modified'}
+            inner_dif[key] = {
+                'value': (file1.get(key), file2.get(key)),
+                'meta': 'modified'}
         # иначе пишем диф двух словарей
         else:
             inner_dif[key] = {
                 'value': (
                     generate_inner_dif(
-                        file1.get(key), file2.get(key))), 'meta': 'modified'}
+                        file1.get(key), file2.get(key))),
+                'meta': 'modified'}
     return inner_dif
 
 
-def list_keys(inner_dif):
-    keys_list = list(file_key for file_key in inner_dif.keys())
-    return keys_list
+def get_keys(inner_dif):
+    keys = list(key for key in inner_dif.keys())
+    return keys
 
 
 # не нравятся имена тут, но других идей пока нет
-def get_file_val(file_key, inner_dif):
-    file_val = inner_dif[file_key]['value']
+def get_value(key, inner_dif):
+    file_val = inner_dif[key]['value']
     return file_val
 
 
-def get_meta(file_key, inner_dif):
-    meta = inner_dif[file_key]['meta']
+def get_meta(key, inner_dif):
+    meta = inner_dif[key]['meta']
     return meta
 
 
 # приводим диф в лист для последующей сборки
 def format_diff_to_lst(inner_dif):
-    keys_list = sorted(list_keys(inner_dif))
+    keys = sorted(get_keys(inner_dif))
     result_diff_lst = []
-    for file_key in keys_list:
+    for key in keys:
         # собираем ключ, значение для дифа, и мета
-        diff_element = ({file_key: get_file_val(file_key, inner_dif)})
-        diff_meta = get_meta(file_key, inner_dif)
+        diff_element = ({key: get_value(key, inner_dif)})
+        diff_meta = get_meta(key, inner_dif)
     # строим каждый элемент дифа по мета и значению
         if diff_meta == '+' or diff_meta == '-':
             # пишем уникальные значения
             result_diff_lst.append(f'{diff_meta} {diff_element}')
         elif diff_meta == 'modified':
             # пишем измененные значения (2 варианта)
-            diff1 = ({file_key: get_file_val(file_key, inner_dif)[0]})
-            diff2 = ({file_key: get_file_val(file_key, inner_dif)[1]})
+            diff1 = ({key: get_value(key, inner_dif)[0]})
+            diff2 = ({key: get_value(key, inner_dif)[1]})
             result_diff_lst.append(f'- {diff1}\n+ {diff2}')
         else:
             # осталость записать мэтчи
@@ -131,6 +133,6 @@ __all__ = (
     'format_diff_to_lst',
     'get_files',
     'get_meta',
-    'get_file_val',
-    'list_keys'
+    'get_value',
+    'get_keys'
 )
