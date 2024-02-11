@@ -72,7 +72,7 @@ def get_keys(inner_dif):
     return keys
 
 
-# не нравятся имена тут, но других идей пока нет
+# получаем значение ключа из дифа
 def get_value(key, inner_dif):
     file_val = inner_dif[key]['value']
     return file_val
@@ -85,9 +85,9 @@ def get_meta(key, inner_dif):
 
 # приводим диф в лист для последующей сборки
 def format_diff_to_lst(inner_dif):
-    keys = sorted(get_keys(inner_dif))
+    keys_lst = sorted(get_keys(inner_dif))
     result_diff_lst = []
-    for key in keys:
+    for key in keys_lst:
         # собираем ключ, значение для дифа, и мета
         diff_element = ({key: get_value(key, inner_dif)})
         diff_meta = get_meta(key, inner_dif)
