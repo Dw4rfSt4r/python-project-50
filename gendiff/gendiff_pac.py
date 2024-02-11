@@ -30,7 +30,7 @@ def get_files(path1, path2):
 # этот словарь это внутренняя структура дифа
 def generate_diff_dic(file1, file2):
     diff_dic = {}
-    # уникальные значения (+/- в мета)
+    #  добавленные и удаленные значения (+/- в мета)
     added_keys = set(file2) - set(file1)
     removed_keys = set(file1) - set(file2)
     # Запись удаленных ключей
@@ -49,7 +49,7 @@ def generate_diff_dic(file1, file2):
         # оригиналы пишутся, как есть если совпали ключи (выход из рекурсии)
         if key_val1 == key_val2:
             diff_dic[key] = {'file_key_val': file1.get(key),
-                             'meta': 'match'}
+                             'meta': 'match'}  # итог: словари без пометок
         # если только в одном  варианте словарь, пишем кортеж с 1 и 2 значениями
         elif not isinstance(file1.get(key),
                             dict) or not isinstance(file2.get(key),
@@ -66,7 +66,7 @@ def generate_diff_dic(file1, file2):
 
 
 def list_keys(diff_dic):
-    keys_list = list(file_key for file_key, val in diff_dic.items())
+    keys_list = list(file_key for file_key in diff_dic.keys())
     return keys_list
 
 

@@ -114,5 +114,4 @@ def test_format_diff_to_lst():
 def test_generate_diff():
     assert generate_diff(path1, path2) == """{\n- {'follow': false}\n  {'host': 'hexlet.io'}\n- {'proxy': '123.234.53.22'}\n- {'timeout': 50}\n+ {'timeout': 20}\n+ {'verbose': True}\n}"""
 
-    print(generate_diff(path3, path4))
     assert generate_diff(path3, path4) == """{\n- {'follow': false}\n  {'host': 'hexlet.io'}\n- {'proxy': '123.234.53.22'}\n- {'timeout': 50}\n+ {'timeout': 20}\n+ {'verbose': True}\n}"""
