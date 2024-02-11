@@ -15,8 +15,8 @@ file1, file2 = get_files(path1, path2)
 file3, file4 = get_files(path3, path4)
 nstd_jsn1, nstd_jsn2 = get_files(pth_nstd_jsn1, pth_nstd_jsn2)
 nstd_yml1, nstd_yml2 = get_files(pth_nstd_yml1, pth_nstd_yml2)
-diff_dic_json = generate_inner_dif(file1, file2)
-diff_dic_yml = generate_inner_dif(file3, file4)
+inner_dif_json = generate_inner_dif(file1, file2)
+inner_dif_yml = generate_inner_dif(file3, file4)
 
 
 def test_generate_inner_dif():
@@ -96,14 +96,14 @@ def test_generate_inner_dif():
 
 
 def test_format_diff_to_lst():
-    assert format_diff_to_lst(diff_dic_json) == [
+    assert format_diff_to_lst(inner_dif_json) == [
         "- {'follow': false}",
         "  {'host': 'hexlet.io'}",
         "- {'proxy': '123.234.53.22'}",
         "- {'timeout': 50}\n+ {'timeout': 20}",
         "+ {'verbose': True}"]
 
-    assert format_diff_to_lst(diff_dic_yml) == [
+    assert format_diff_to_lst(inner_dif_yml) == [
         "- {'follow': false}",
         "  {'host': 'hexlet.io'}",
         "- {'proxy': '123.234.53.22'}",
