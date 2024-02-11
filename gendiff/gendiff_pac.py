@@ -28,7 +28,7 @@ def get_files(path1, path2):
 # создаем словарь с ключами/значениями и метаданными
 # meta это результат сравнения (+/-/match/modified)
 # этот словарь это внутренняя структура дифа
-def generate_diff_dic(file1, file2):
+def generate_inner_dif(file1, file2):
     diff_dic = {}
     #  добавленные и удаленные значения (+/- в мета)
     added_keys = set(file2) - set(file1)
@@ -60,7 +60,7 @@ def generate_diff_dic(file1, file2):
         else:
             diff_dic[key] = {
                 'file_key_val': (
-                    generate_diff_dic(
+                    generate_inner_dif(
                         file1.get(key), file2.get(key))), 'meta': 'modified'}
     return diff_dic
 
@@ -117,7 +117,7 @@ def generate_diff(path1, path2):
     # получаем файлы
     file1, file2 = get_files(path1, path2)
     # создаем структуру
-    diff_dic = generate_diff_dic(file1, file2)
+    diff_dic = generate_inner_dif(file1, file2)
     # приводим лист к строке переносами
     diff_lst_concatenated = "\n".join(format_diff_to_lst(diff_dic))
     # оборачиваем в скобки
@@ -126,7 +126,7 @@ def generate_diff(path1, path2):
 
 
 __all__ = (
-    'generate_diff_dic',
+    'generate_inner_dif',
     'generate_diff',
     'format_diff_to_lst',
     'get_files',

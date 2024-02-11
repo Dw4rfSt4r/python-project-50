@@ -1,4 +1,4 @@
-from gendiff.gendiff_pac import generate_diff, generate_diff_dic
+from gendiff.gendiff_pac import generate_diff, generate_inner_dif
 from gendiff.gendiff_pac import get_files, format_diff_to_lst
 
 
@@ -15,26 +15,26 @@ file1, file2 = get_files(path1, path2)
 file3, file4 = get_files(path3, path4)
 nstd_jsn1, nstd_jsn2 = get_files(pth_nstd_jsn1, pth_nstd_jsn2)
 nstd_yml1, nstd_yml2 = get_files(pth_nstd_yml1, pth_nstd_yml2)
-diff_dic_json = generate_diff_dic(file1, file2)
-diff_dic_yml = generate_diff_dic(file3, file4)
+diff_dic_json = generate_inner_dif(file1, file2)
+diff_dic_yml = generate_inner_dif(file3, file4)
 
 
-def test_generate_diff_dic():
-    assert generate_diff_dic(file1, file2) == {
+def test_generate_inner_dif():
+    assert generate_inner_dif(file1, file2) == {
         'follow': {'file_key_val': False, 'meta': '-'},
         'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
         'verbose': {'file_key_val': True, 'meta': '+'},
         'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
         'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
 
-    assert generate_diff_dic(file3, file4) == {
+    assert generate_inner_dif(file3, file4) == {
         'follow': {'file_key_val': False, 'meta': '-'},
         'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
         'verbose': {'file_key_val': True, 'meta': '+'},
         'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
         'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
 
-    assert generate_diff_dic(nstd_jsn1, nstd_jsn2) == {
+    assert generate_inner_dif(nstd_jsn1, nstd_jsn2) == {
         'group2': {
             'file_key_val': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
         'group3': {
@@ -64,7 +64,7 @@ def test_generate_diff_dic():
             'setting3': {'file_key_val': (True, None),
                          'meta': 'modified'}}, 'meta': 'modified'}}
     
-    assert generate_diff_dic(nstd_yml1, nstd_yml2) == {
+    assert generate_inner_dif(nstd_yml1, nstd_yml2) == {
         'group2': {
             'file_key_val': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
         'group3': {
