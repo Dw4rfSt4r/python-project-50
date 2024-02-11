@@ -21,77 +21,77 @@ inner_dif_yml = generate_inner_dif(file3, file4)
 
 def test_generate_inner_dif():
     assert generate_inner_dif(file1, file2) == {
-        'follow': {'file_key_val': False, 'meta': '-'},
-        'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
-        'verbose': {'file_key_val': True, 'meta': '+'},
-        'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
-        'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
+        'follow': {'value': False, 'meta': '-'},
+        'proxy': {'value': '123.234.53.22', 'meta': '-'},
+        'verbose': {'value': True, 'meta': '+'},
+        'timeout': {'value': (50, 20), 'meta': 'modified'},
+        'host': {'value': 'hexlet.io', 'meta': 'match'}}
 
     assert generate_inner_dif(file3, file4) == {
-        'follow': {'file_key_val': False, 'meta': '-'},
-        'proxy': {'file_key_val': '123.234.53.22', 'meta': '-'},
-        'verbose': {'file_key_val': True, 'meta': '+'},
-        'timeout': {'file_key_val': (50, 20), 'meta': 'modified'},
-        'host': {'file_key_val': 'hexlet.io', 'meta': 'match'}}
+        'follow': {'value': False, 'meta': '-'},
+        'proxy': {'value': '123.234.53.22', 'meta': '-'},
+        'verbose': {'value': True, 'meta': '+'},
+        'timeout': {'value': (50, 20), 'meta': 'modified'},
+        'host': {'value': 'hexlet.io', 'meta': 'match'}}
 
     assert generate_inner_dif(nstd_jsn1, nstd_jsn2) == {
         'group2': {
-            'file_key_val': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
+            'value': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
         'group3': {
-            'file_key_val': {'deep': {'id': {'number': 45}},
-                             'fee': 100500}, 'meta': '+'},
+            'value': {'deep': {'id': {'number': 45}},
+                      'fee': 100500}, 'meta': '+'},
         'group1': {
-            'file_key_val': {
-                'foo': {'file_key_val': 'bar', 'meta': 'match'},
-                'baz': {'file_key_val': ('bas', 'bars'), 'meta': 'modified'},
-                'nest': {'file_key_val': ({'key': 'value'}, 'str'),
+            'value': {
+                'foo': {'value': 'bar', 'meta': 'match'},
+                'baz': {'value': ('bas', 'bars'), 'meta': 'modified'},
+                'nest': {'value': ({'key': 'value'}, 'str'),
                          'meta': 'modified'}},
             'meta': 'modified'},
-        'common': {'file_key_val': {
-            'setting2': {'file_key_val': 200, 'meta': '-'},
-            'follow': {'file_key_val': False, 'meta': '+'},
-            'setting5': {'file_key_val': {'key5': 'value5'}, 'meta': '+'},
-            'setting4': {'file_key_val': 'blah blah', 'meta': '+'},
-            'setting1': {'file_key_val': 'Value 1', 'meta': 'match'},
-            'setting6': {'file_key_val': {
-                'ops': {'file_key_val': 'vops', 'meta': '+'},
-                'doge': {'file_key_val': {
-                    'wow': {'file_key_val': ('', 'so much'),
+        'common': {'value': {
+            'setting2': {'value': 200, 'meta': '-'},
+            'follow': {'value': False, 'meta': '+'},
+            'setting5': {'value': {'key5': 'value5'}, 'meta': '+'},
+            'setting4': {'value': 'blah blah', 'meta': '+'},
+            'setting1': {'value': 'Value 1', 'meta': 'match'},
+            'setting6': {'value': {
+                'ops': {'value': 'vops', 'meta': '+'},
+                'doge': {'value': {
+                    'wow': {'value': ('', 'so much'),
                             'meta': 'modified'}},
                          'meta': 'modified'},
-                'key': {'file_key_val': 'value', 'meta': 'match'}},
+                'key': {'value': 'value', 'meta': 'match'}},
                 'meta': 'modified'},
-            'setting3': {'file_key_val': (True, None),
+            'setting3': {'value': (True, None),
                          'meta': 'modified'}}, 'meta': 'modified'}}
-    
+
     assert generate_inner_dif(nstd_yml1, nstd_yml2) == {
         'group2': {
-            'file_key_val': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
+            'value': {'abc': 12345, 'deep': {'id': 45}}, 'meta': '-'},
         'group3': {
-            'file_key_val': {'deep': {'id': {'number': 45}},
-                             'fee': 100500}, 'meta': '+'},
+            'value': {'deep': {'id': {'number': 45}},
+                      'fee': 100500}, 'meta': '+'},
         'group1': {
-            'file_key_val': {
-                'foo': {'file_key_val': 'bar', 'meta': 'match'},
-                'baz': {'file_key_val': ('bas', 'bars'), 'meta': 'modified'},
-                'nest': {'file_key_val': ({'key': 'value'}, 'str'),
+            'value': {
+                'foo': {'value': 'bar', 'meta': 'match'},
+                'baz': {'value': ('bas', 'bars'), 'meta': 'modified'},
+                'nest': {'value': ({'key': 'value'}, 'str'),
                          'meta': 'modified'}},
             'meta': 'modified'},
-        'common': {'file_key_val': {
-            'setting2': {'file_key_val': 200, 'meta': '-'},
-            'follow': {'file_key_val': False, 'meta': '+'},
-            'setting5': {'file_key_val': {'key5': 'value5'}, 'meta': '+'},
-            'setting4': {'file_key_val': 'blah blah', 'meta': '+'},
-            'setting1': {'file_key_val': 'Value 1', 'meta': 'match'},
-            'setting6': {'file_key_val': {
-                'ops': {'file_key_val': 'vops', 'meta': '+'},
-                'doge': {'file_key_val': {
-                    'wow': {'file_key_val': ('', 'so much'),
+        'common': {'value': {
+            'setting2': {'value': 200, 'meta': '-'},
+            'follow': {'value': False, 'meta': '+'},
+            'setting5': {'value': {'key5': 'value5'}, 'meta': '+'},
+            'setting4': {'value': 'blah blah', 'meta': '+'},
+            'setting1': {'value': 'Value 1', 'meta': 'match'},
+            'setting6': {'value': {
+                'ops': {'value': 'vops', 'meta': '+'},
+                'doge': {'value': {
+                    'wow': {'value': ('', 'so much'),
                             'meta': 'modified'}},
                          'meta': 'modified'},
-                'key': {'file_key_val': 'value', 'meta': 'match'}},
+                'key': {'value': 'value', 'meta': 'match'}},
                 'meta': 'modified'},
-            'setting3': {'file_key_val': (True, None),
+            'setting3': {'value': (True, None),
                          'meta': 'modified'}}, 'meta': 'modified'}}
 
 

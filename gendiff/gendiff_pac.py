@@ -30,16 +30,16 @@ def get_files(path1, path2):
 # этот словарь это внутренняя структура дифа
 def generate_inner_dif(file1, file2):
     inner_dif = {}
-    #  добавленные и удаленные значения (+/- в мета)
+    #  добавленные и удаленные ключи (+/- в мета)
     added_keys = set(file2) - set(file1)
     removed_keys = set(file1) - set(file2)
-    # Запись удаленных ключей
+    # Запись удаленных ключей в диф
     inner_dif.update({
-        key: {'file_key_val': file1[key], 'meta': '-'}
+        key: {'value': file1[key], 'meta': '-'}
         for key in removed_keys})
-    # Запись добавленных ключей
+    # Запись добавленных ключей в диф
     inner_dif.update({
-        key: {'file_key_val': file2[key], 'meta': '+'}
+        key: {'value': file2[key], 'meta': '+'}
         for key in added_keys})
     # пересекающиеся ключи:
     same_keys = set(file1) & set(file2)
@@ -48,18 +48,18 @@ def generate_inner_dif(file1, file2):
         key_val2 = {key: file2.get(key)}
         # оригиналы пишутся, как есть если совпали ключи (выход из рекурсии)
         if key_val1 == key_val2:
-            inner_dif[key] = {'file_key_val': file1.get(key),
-                             'meta': 'match'}  # итог: словари без пометок
+            inner_dif[key] = {'value': file1.get(key),
+                              'meta': 'match'}  # итог: словари без пометок
         # если только в одном  варианте словарь, пишем кортеж с 1 и 2 значениями
         elif not isinstance(file1.get(key),
                             dict) or not isinstance(file2.get(key),
                                                     dict):
-            inner_dif[key] = {'file_key_val': (
+            inner_dif[key] = {'value': (
                 file1.get(key), file2.get(key)), 'meta': 'modified'}
         # иначе пишем диф двух словарей
         else:
             inner_dif[key] = {
-                'file_key_val': (
+                'value': (
                     generate_inner_dif(
                         file1.get(key), file2.get(key))), 'meta': 'modified'}
     return inner_dif
@@ -72,7 +72,7 @@ def list_keys(inner_dif):
 
 # не нравятся имена тут, но других идей пока нет
 def get_file_val(file_key, inner_dif):
-    file_val = inner_dif[file_key]['file_key_val']
+    file_val = inner_dif[file_key]['value']
     return file_val
 
 
