@@ -1,4 +1,5 @@
-from diff_generator.arg_parser import validate_file_ext
+from diff_generator.arg_parser import validate_file_ext # read_file
+
 import pytest # type: ignore
 
 
@@ -16,3 +17,18 @@ def test_empty_file1():
 def test_empty_file2():
     with pytest.raises(ValueError):
         validate_file_ext("file.json", "")
+
+
+
+"""# Тесты с путями до файлов
+def test_read_json_file1():
+    path1 = 'tests/fixtures/plane_json_1.json'
+    expected_data = {"key1": "value1"}
+    
+    # Читаем файл и проверяем его содержимое
+    result = read_file(path1)
+    assert result == expected_data  # Ожидаемое содержимое
+
+def test_read_json_file2():
+    path2 = 'tests/fixtures/plane_json_2.json'
+    expected_data = {"key2": "value2"}"""
