@@ -1,2 +1,10 @@
-.venv
-__pycache__
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+.venv/
+
+# uv.lock file
+uv.lock

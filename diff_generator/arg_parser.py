@@ -1,21 +1,24 @@
 from argparse import ArgumentParser
 
-
-# def arg_validator()
+def validate_file_ext(file1, file2):
+    valid_extensions = (".json", ".yaml", ".yml")
+    if not file1 or not file2:
+        raise ValueError("Invalid file paths")
+    if not (file1.lower().endswith(valid_extensions) and 
+            file2.lower().endswith(valid_extensions)):
+        raise ValueError("Allowed extensions: .json, .yaml, .yml")
+    return True
 
 def parse_input():
-    # Создаем экземпляр ArgumentParser
     parser = ArgumentParser(description="Compares two configuration files and shows a difference.")
+    parser.add_argument("first_file", type=str)
+    parser.add_argument("second_file", type=str)
+    return parser.parse_args()
 
-    # Добавляем аргументы
-    parser.add_argument(
-        "first_file", 
-        type=str, 
-    )
-    parser.add_argument(
-        "second_file", 
-        type=str, 
-    )
+def main():
+    args = parse_input()
+    validate_file_ext(args.first_file, args.second_file)
+    print(f"Comparing: {args.first_file} vs {args.second_file}")
 
-    args = parser.parse_args()
-    return args
+if __name__ == "__main__":
+    main()
