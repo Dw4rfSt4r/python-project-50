@@ -1,4 +1,4 @@
-from diff_generator.arg_parser import validate_file_ext # read_file
+from diff_generator.arg_parser import validate_file_ext
 
 import pytest # type: ignore
 
