@@ -1,22 +1,3 @@
-from diff_generator.arg_parser import read_file
-
-file1 = read_file("tests/fixtures/flat_1.json")
-'''
-{
-    "host": "hexlet.io",
-    "timeout": 50,
-    "proxy": "123.234.53.22",
-    "follow": false
-}
-'''
-file2 = read_file("tests/fixtures/flat_2.json")
-'''
-{
-    "timeout": 20,
-    "verbose": true,
-    "host": "hexlet.io"
-}
-'''
 def process_flat_files(file1: dict, file2: dict) -> dict:
     # Create an empty dictionary to store differences
     inner_diff = {}
@@ -38,5 +19,3 @@ def process_flat_files(file1: dict, file2: dict) -> dict:
             # If key only exists in the first dictionary
             inner_diff[key] = {'status': 'removed', 'value': file1[key]}
     return inner_diff
-    
-print(process_flat_files(file1, file2))

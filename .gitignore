@@ -11,3 +11,6 @@ uv.lock
 
 .vscode
 test_
+
+#private files
+sand_box.py

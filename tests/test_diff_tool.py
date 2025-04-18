@@ -1,4 +1,5 @@
-from diff_generator.diff_tool import read_file, process_flat_files
+from diff_generator.diff_tool import process_flat_files
+from diff_generator.arg_parser import read_file
 
 file1 = read_file("tests/fixtures/flat_1.json")
 '''
