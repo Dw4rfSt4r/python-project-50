@@ -10,7 +10,6 @@ yml1 = read_file("tests/test_data/flat_1.yml")
 yml2 = read_file("tests/test_data/flat_2.yaml")
 
 
-
 def test_process_flat_files():
     expected = {
         "host": {
