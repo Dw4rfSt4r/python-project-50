@@ -6,3 +6,8 @@
 
 parsing flat json-files:
 [![asciicast](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt.svg)](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt)
+
+
+### My tests and linter status:
+
+[![Python CI](https://github.com/Dw4rfSt4r/python-project-50/actions/workflows/python-ci.yml/badge.svg)](https://github.com/Dw4rfSt4r/python-project-50/actions/workflows/python-ci.yml)
