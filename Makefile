@@ -17,7 +17,7 @@ test:
 
 test-coverage:
 	uv run pytest --cov=diff_generator --cov-report xml --cov-report term
-
+	
 gendiff:
 	uv run gendiff
 
