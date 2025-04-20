@@ -1,5 +1,5 @@
-from diff_generator.diff_tool import process_flat_files
 from diff_generator.arg_parser import read_file
+from diff_generator.diff_tool import process_flat_files
 
 file1 = read_file("tests/fixtures/flat_1.json")
 '''
@@ -18,6 +18,8 @@ file2 = read_file("tests/fixtures/flat_2.json")
     "host": "hexlet.io"
 }
 '''
+
+
 def test_process_flat_files():
     expected = {
         "host": {

@@ -1,5 +1,6 @@
 from diff_generator.formatter import format_stylish
 
+
 def test_format_stylish():
     diff = {
         "host": {"status": "unchanged", "value": "hexlet.io"},

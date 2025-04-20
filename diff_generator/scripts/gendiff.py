@@ -1,4 +1,4 @@
-from diff_generator.arg_parser import get_filepath, validate_file_ext, read_file
+from diff_generator.arg_parser import get_filepath, read_file, validate_file_ext
 from diff_generator.diff_tool import process_flat_files
 from diff_generator.formatter import format_stylish
 
@@ -11,6 +11,7 @@ def main():
     diff = process_flat_files(file_1, file_2)
     print(format_stylish(diff))
     return
+
 
 if __name__ == "__main__":
     main()

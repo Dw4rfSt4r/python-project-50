@@ -1,6 +1,8 @@
-from argparse import ArgumentParser
 import json
+from argparse import ArgumentParser
+
 import yaml
+
 
 def validate_file_ext(file1, file2):
     valid_extensions = (".json", ".yaml", ".yml")
@@ -11,13 +13,20 @@ def validate_file_ext(file1, file2):
         raise ValueError("Allowed extensions: .json, .yaml, .yml")
     return True
 
+
 def get_filepath():
-    parser = ArgumentParser(description="Compares two configuration files and shows a difference.")
+    parser = ArgumentParser(
+        description="Compares two configuration files and shows a difference.")
     parser.add_argument("first_file", type=str)
     parser.add_argument("second_file", type=str)
-    parser.add_argument('-f', '--format', type=str, default="stylish", help="set format of output")
+    parser.add_argument(
+        '-f', '--format',
+        type=str,
+        default="stylish",
+        help="set format of output")
     args = parser.parse_args()
     return args.first_file, args.second_file
+
 
 def read_file(file_path):
     with open(file_path) as file:
