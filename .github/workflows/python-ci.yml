@@ -1,8 +1,11 @@
 name: Python CI
 
 on:
-  - push
-  - pull_request
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Добавлен для возможности ручного запуска
 
 jobs:
   build:
@@ -18,9 +21,11 @@ jobs:
         run: |
           pip install uv
           make install
-      - name: Run linter and pytest
+      - name: Run linter
         run: |
           make lint
+      - name: Run tests
+        run: |
           make test
       - name: Run test coverage
         run: |
