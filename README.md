@@ -7,6 +7,8 @@
 parsing flat json-files:
 [![asciicast](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt.svg)](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt)
 
+[![asciicast](https://asciinema.org/a/vfbgZ1Xlswy5M6szyDC7rRyEW.svg)](https://asciinema.org/a/vfbgZ1Xlswy5M6szyDC7rRyEW)
+
 
 ### My tests and linter status:
 

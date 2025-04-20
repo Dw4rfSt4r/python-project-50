@@ -1,23 +1,14 @@
 from diff_generator.arg_parser import read_file
 from diff_generator.diff_tool import process_flat_files
 
-file1 = read_file("tests/fixtures/flat_1.json")
-'''
-{
-    "host": "hexlet.io",
-    "timeout": 50,
-    "proxy": "123.234.53.22",
-    "follow": false
-}
-'''
-file2 = read_file("tests/fixtures/flat_2.json")
-'''
-{
-    "timeout": 20,
-    "verbose": true,
-    "host": "hexlet.io"
-}
-'''
+json1 = read_file("tests/test_data/flat_1.json")
+
+json2 = read_file("tests/test_data/flat_2.json")
+
+yml1 = read_file("tests/test_data/flat_1.yml")
+
+yml2 = read_file("tests/test_data/flat_2.yaml")
+
 
 
 def test_process_flat_files():
@@ -39,4 +30,6 @@ def test_process_flat_files():
             "status": "added",
             "value": True}
     }
-    assert process_flat_files(file1, file2) == expected
+    assert process_flat_files(json1, json2) == expected
+    assert process_flat_files(yml1, yml2) == expected
+    assert process_flat_files(json1, yml2) == expected
