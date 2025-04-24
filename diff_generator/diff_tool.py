@@ -1,28 +1,49 @@
-def process_flat_files(file1: dict, file2: dict) -> dict:
-    # Create an empty dictionary to store differences
-    inner_diff = {}
-    # Get all keys from both dictionaries
-    all_keys = set(file1.keys()) | set(file2.keys())
-    for key in all_keys:
-        if key in file1 and key in file2:
+def process_nested_files(file1: dict, file2: dict) -> dict:
+
+    def build_diff(dict1, dict2):
+        # Get all keys from both dictionaries
+        all_keys = sorted(set(dict1.keys()) | set(dict2.keys()))
+        result = {}
+        
+        for key in all_keys:
             # If key exists in both dictionaries
-            if file1[key] == file2[key]:
+            if key in dict1 and key in dict2:
+                # If both values are dictionaries, recursively process them
+                if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                    result[key] = {
+                        'status': 'nested',
+                        'children': build_diff(dict1[key], dict2[key])
+                    }
                 # If values are the same
-                inner_diff[key] = {
-                    'status': 'unchanged',
-                    'value': file1[key]}
-            else:
+                elif dict1[key] == dict2[key]:
+                    result[key] = {
+                        'status': 'unchanged',
+                        'value': dict1[key]
+                    }
                 # If values are different
-                inner_diff[key] = {
-                    'status': 'changed',
-                    'old_value': file1[key],
-                    'new_value': file2[key]}
-        elif key in file2:
+                else:
+                    result[key] = {
+                        'status': 'changed',
+                        'old_value': dict1[key],
+                        'new_value': dict2[key]
+                    }
             # If key only exists in the second dictionary
-            inner_diff[key] = {'status': 'added',
-                               'value': file2[key]}
-        else:
+            elif key in dict2:
+                result[key] = {
+                    'status': 'added',
+                    'value': dict2[key]
+                }
             # If key only exists in the first dictionary
-            inner_diff[key] = {'status': 'removed',
-                               'value': file1[key]}
-    return inner_diff
+            else:
+                result[key] = {
+                    'status': 'removed',
+                    'value': dict1[key]
+                }
+        
+        return result
+    
+    # Start the recursive comparison
+    return build_diff(file1, file2)
+
+
+process_flat_files = process_nested_files
