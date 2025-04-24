@@ -9,7 +9,9 @@ def process_nested_files(file1: dict, file2: dict) -> dict:
             # If key exists in both dictionaries
             if key in dict1 and key in dict2:
                 # If both values are dictionaries, recursively process them
-                if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+                is_dict1 = isinstance(dict1[key], dict)
+                is_dict2 = isinstance(dict2[key], dict)
+                if is_dict1 and is_dict2:
                     result[key] = {
                         'status': 'nested',
                         'children': build_diff(dict1[key], dict2[key])
