@@ -7,7 +7,12 @@
 parsing flat json-files:
 [![asciicast](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt.svg)](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt)
 
+parsing nested json-files:
 [![asciicast](https://asciinema.org/a/vfbgZ1Xlswy5M6szyDC7rRyEW.svg)](https://asciinema.org/a/vfbgZ1Xlswy5M6szyDC7rRyEW)
+
+parsing nested yaml-files:
+[![asciicast](https://asciinema.org/a/Gbl9L2hBAyRAvLKnvm1S7GF5J.svg)](https://asciinema.org/a/Gbl9L2hBAyRAvLKnvm1S7GF5J)
+
 
 
 ### My tests and linter status:

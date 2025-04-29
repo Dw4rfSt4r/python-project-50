@@ -1,5 +1,5 @@
 from diff_generator.arg_parser import read_file
-from diff_generator.diff_tool import process_nested_files
+from diff_generator.diff_tool import build_diff
 
 json1 = read_file("tests/test_data/flat_1.json")
 
@@ -34,12 +34,12 @@ def test_process_flat_files():
             "status": "added",
             "value": True}
     }
-    assert process_nested_files(json1, json2) == expected
-    assert process_nested_files(yml1, yml2) == expected
-    assert process_nested_files(json1, yml2) == expected
+    assert build_diff(json1, json2) == expected
+    assert build_diff(yml1, yml2) == expected
+    assert build_diff(json1, yml2) == expected
     
 
-def test_process_nested_files():
+def test_build_diff():
     expected = {
         "common": {
             "status": "nested",
@@ -139,5 +139,5 @@ def test_process_nested_files():
         }
     }
 
-    assert process_nested_files(nested_json_1, nested_json_2) == expected
-    assert process_nested_files(nested_yml_1, nested_yml_2) == expected
+    assert build_diff(nested_json_1, nested_json_2) == expected
+    assert build_diff(nested_yml_1, nested_yml_2) == expected
