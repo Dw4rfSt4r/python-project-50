@@ -11,6 +11,8 @@ yml2 = read_file("tests/test_data/flat_2.yaml")
 
 nested_json_1 = read_file("tests/test_data/nested_1.json")
 nested_json_2 = read_file("tests/test_data/nested_2.json")
+nested_yml_1 = read_file("tests/test_data/nested_1.yaml")
+nested_yml_2 = read_file("tests/test_data/nested_2.yml")
 
 
 def test_process_flat_files():
@@ -138,3 +140,4 @@ def test_process_nested_files():
     }
 
     assert process_nested_files(nested_json_1, nested_json_2) == expected
+    assert process_nested_files(nested_yml_1, nested_yml_2) == expected
