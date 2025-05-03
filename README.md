@@ -16,6 +16,8 @@ parsing nested yaml-files:
 parsing nested json-files with plain-format output:
 [![asciicast](https://asciinema.org/a/6PZzYxEhO6x2iJfVgZmwiK653.svg)](https://asciinema.org/a/6PZzYxEhO6x2iJfVgZmwiK653)
 
+parsing nested json-files with json-format output:
+[![asciicast](https://asciinema.org/a/OHcKrJPXWp33ZbAztx60Fr7jk.svg)](https://asciinema.org/a/OHcKrJPXWp33ZbAztx60Fr7jk)
 
 
 ### My tests and linter status:

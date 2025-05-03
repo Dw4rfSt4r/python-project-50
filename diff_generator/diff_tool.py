@@ -1,5 +1,6 @@
 from diff_generator.formatters.plain_formatter import format_plain
 from diff_generator.formatters.stylish_formatter import format_stylish
+from diff_generator.formatters.to_json_formatter import json_formatter
 
 
 def build_diff(file1: dict, file2: dict) -> dict:
@@ -51,5 +52,7 @@ def generate_diff(file1: dict, file2: dict, format_name='stylish'):
         return format_stylish(diff)
     elif format_name == 'plain':
         return format_plain(diff)
+    elif format_name == 'json':
+        return json_formatter(diff)
     else:
         raise ValueError(f"Unknown format: {format_name}")

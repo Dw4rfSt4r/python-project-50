@@ -23,7 +23,7 @@ def get_filepath():
         '-f', '--format',
         type=str,
         default="stylish",
-        choices=["stylish", "plain"],
+        choices=["stylish", "plain", "json"],
         help="set format of output")
     args = parser.parse_args()
     return args.first_file, args.second_file, args.format
