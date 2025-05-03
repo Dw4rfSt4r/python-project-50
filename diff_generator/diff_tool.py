@@ -1,4 +1,4 @@
-from diff_generator.formatter import format_stylish
+from diff_generator.formatter import format_plain, format_stylish
 
 
 def build_diff(file1: dict, file2: dict) -> dict:
@@ -48,5 +48,7 @@ def generate_diff(file1: dict, file2: dict, format_name='stylish'):
 
     if format_name == 'stylish':
         return format_stylish(diff)
+    elif format_name == 'plain':
+        return format_plain(diff)
     else:
         raise ValueError(f"Unknown format: {format_name}")

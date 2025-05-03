@@ -141,3 +141,69 @@ def test_build_diff():
 
     assert build_diff(nested_json_1, nested_json_2) == expected
     assert build_diff(nested_yml_1, nested_yml_2) == expected
+
+
+def test_build_diff_empty():
+    diff = {}
+    assert build_diff({}, {}) == diff
+
+
+def test_build_diff_unchanged_single_key():
+    dict1 = {"key": "value"}
+    dict2 = {"key": "value"}
+    expected = {
+        "key": {
+            "status": "unchanged",
+            "value": "value"
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
+
+
+def test_build_diff_added_key():
+    dict1 = {}
+    dict2 = {"key": "value"}
+    expected = {
+        "key": {
+            "status": "added",
+            "value": "value"
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
+
+
+def test_build_diff_removed_key():
+    dict1 = {"key": "value"}
+    dict2 = {}
+    expected = {
+        "key": {
+            "status": "removed",
+            "value": "value"
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
+
+
+def test_build_diff_changed_key():
+    dict1 = {"key": "value1"}
+    dict2 = {"key": "value2"}
+    expected = {
+        "key": {
+            "status": "changed",
+            "old_value": "value1",
+            "new_value": "value2"
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
+
+
+def test_build_diff_nested_empty_children():
+    dict1 = {"parent": {}}
+    dict2 = {"parent": {}}
+    expected = {
+        "parent": {
+            "status": "nested",
+            "children": {}
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
