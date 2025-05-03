@@ -1,5 +1,5 @@
-from diff_generator.arg_parser import read_file
-from diff_generator.diff_tool import build_diff
+from gendiff.arg_parser import read_file
+from gendiff.diff_tool import build_diff
 
 json1 = read_file("tests/test_data/flat_1.json")
 

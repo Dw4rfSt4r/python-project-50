@@ -1,6 +1,6 @@
 import json
 
-from diff_generator.formatters.to_json_formatter import json_formatter
+from gendiff.formatters.to_json_formatter import json_formatter
 
 
 def test_json_formatter_simple_diff():

@@ -1,6 +1,6 @@
 import pytest  # type: ignore
 
-from diff_generator.arg_parser import validate_file_ext
+from gendiff.arg_parser import validate_file_ext
 
 
 def test_valid_extensions():

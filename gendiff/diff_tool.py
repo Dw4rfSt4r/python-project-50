@@ -1,6 +1,6 @@
-from diff_generator.formatters.plain_formatter import format_plain
-from diff_generator.formatters.stylish_formatter import format_stylish
-from diff_generator.formatters.to_json_formatter import json_formatter
+from gendiff.formatters.plain_formatter import format_plain
+from gendiff.formatters.stylish_formatter import format_stylish
+from gendiff.formatters.to_json_formatter import json_formatter
 
 
 def build_diff(file1: dict, file2: dict) -> dict:

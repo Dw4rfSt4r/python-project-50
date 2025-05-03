@@ -1,5 +1,5 @@
-from diff_generator.arg_parser import get_filepath, read_file, validate_file_ext
-from diff_generator.diff_tool import generate_diff
+from gendiff.arg_parser import get_filepath, read_file, validate_file_ext
+from gendiff.diff_tool import generate_diff
 
 
 def main():
