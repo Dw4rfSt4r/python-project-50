@@ -1,4 +1,5 @@
-from diff_generator.formatter import format_plain, format_stylish
+from diff_generator.formatters.plain_formatter import format_plain
+from diff_generator.formatters.stylish_formatter import format_stylish
 
 
 def build_diff(file1: dict, file2: dict) -> dict:
