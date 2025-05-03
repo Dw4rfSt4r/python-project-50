@@ -1,6 +1,6 @@
 from gendiff.arg_parser import read_file, validate_file_ext
-from gendiff.formatters.stylish_formatter import format_stylish
 from gendiff.formatters.plain_formatter import format_plain
+from gendiff.formatters.stylish_formatter import format_stylish
 from gendiff.formatters.to_json_formatter import json_formatter
 
 
