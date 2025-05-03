@@ -5,7 +5,16 @@ from gendiff.formatters.to_json_formatter import json_formatter
 
 
 def build_diff(file1: dict, file2: dict) -> dict:
-
+    """
+    Builds an internal diff structure representing 
+    the differences between two dictionaries.
+    Args:
+        file1 (dict): The first dictionary.
+        file2 (dict): The second dictionary.
+    Returns:
+        dict: A dictionary representing 
+        the difference between the two dictionaries.
+    """
     def build_diff_recursive(dict1, dict2):
         all_keys = sorted(set(dict1.keys()) | set(dict2.keys()))
         result = {}
@@ -46,7 +55,21 @@ def build_diff(file1: dict, file2: dict) -> dict:
     return build_diff_recursive(file1, file2)
 
 
-def generate_diff(file1, file2, format_name='stylish'):
+def generate_diff(file1, file2, format_name='stylish') -> str:
+    """
+    Generates a diff between two dictionaries 
+    and returns it in the specified format.
+    Args:
+        file1 (dict or str): First dictionary or the path to the first file.
+
+        file2 (dict or str): Second dictionary or the path to the second file.
+
+        format_name (str, optional): The name of the format to use.
+        available formats: 'stylish', 'plain', 'json'.
+        defaults to 'stylish'.
+    Returns:
+        str: The diff between the two dictionaries in the specified format.
+    """
     if isinstance(file1, str) and isinstance(file2, str):
         validate_file_ext(file1, file2)
         file1 = read_file(file1)

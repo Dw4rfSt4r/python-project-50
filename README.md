@@ -1,8 +1,31 @@
+Difference Calculator
+A command-line utility that compares two configuration files and shows the difference between them.
+
+Requirements
+Python 3.8 or higher
+pip (Python package manager)
+uv (Python package installer and resolver)
+
+### Installation
+1. Clone the repository:
+git clone https://github.com/Dw4rfSt4r/python-project-50.git
+
+2. Navigate to the project directory:
+cd python-project-50
+
+3. Install package manager uv:
+curl -LsSf https://astral.sh/uv/install.sh | sh
+4. Install the project dependencies:
+make install
+5. Build and install the package:
+make build
+make package-install
+
+
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Dw4rfSt4r/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Dw4rfSt4r/python-project-50/actions)
 
-
-### usage
+### Usage
 
 parsing flat json-files:
 [![asciicast](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt.svg)](https://asciinema.org/a/FtTgTiISTfvCnuUknvVgiicEt)
