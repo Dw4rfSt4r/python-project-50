@@ -1,5 +1,6 @@
-from gendiff.formatters.plain_formatter import format_plain
+from gendiff.arg_parser import read_file, validate_file_ext
 from gendiff.formatters.stylish_formatter import format_stylish
+from gendiff.formatters.plain_formatter import format_plain
 from gendiff.formatters.to_json_formatter import json_formatter
 
 
@@ -45,7 +46,12 @@ def build_diff(file1: dict, file2: dict) -> dict:
     return build_diff_recursive(file1, file2)
 
 
-def generate_diff(file1: dict, file2: dict, format_name='stylish'):
+def generate_diff(file1, file2, format_name='stylish'):
+    if isinstance(file1, str) and isinstance(file2, str):
+        validate_file_ext(file1, file2)
+        file1 = read_file(file1)
+        file2 = read_file(file2)
+
     diff = build_diff(file1, file2)
 
     if format_name == 'stylish':
