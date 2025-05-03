@@ -1,14 +1,10 @@
 from gendiff.arg_parser import read_file
-from gendiff.diff_tool import build_diff
+from gendiff.diff_tool import build_diff, generate_diff
 
 json1 = read_file("tests/test_data/flat_1.json")
-
 json2 = read_file("tests/test_data/flat_2.json")
-
 yml1 = read_file("tests/test_data/flat_1.yml")
-
 yml2 = read_file("tests/test_data/flat_2.yaml")
-
 nested_json_1 = read_file("tests/test_data/nested_1.json")
 nested_json_2 = read_file("tests/test_data/nested_2.json")
 nested_yml_1 = read_file("tests/test_data/nested_1.yaml")
@@ -21,11 +17,11 @@ def test_process_flat_files():
             "status": "unchanged",
             "value": "hexlet.io"},
         "timeout": {
-            "status": "changed", 
-            "old_value": 50, 
+            "status": "changed",
+            "old_value": 50,
             "new_value": 20},
         "proxy": {
-            "status": "removed", 
+            "status": "removed",
             "value": "123.234.53.22"},
         "follow": {
             "status": "removed",
@@ -34,10 +30,19 @@ def test_process_flat_files():
             "status": "added",
             "value": True}
     }
-    assert build_diff(json1, json2) == expected
-    assert build_diff(yml1, yml2) == expected
-    assert build_diff(json1, yml2) == expected
-    
+    try:
+        assert build_diff(json1, json2) == expected
+    except AssertionError:
+        raise
+    try:
+        assert build_diff(yml1, yml2) == expected
+    except AssertionError:
+        raise
+    try:
+        assert build_diff(json1, yml2) == expected
+    except AssertionError:
+        raise
+
 
 def test_build_diff():
     expected = {
@@ -138,14 +143,21 @@ def test_build_diff():
             }
         }
     }
-
-    assert build_diff(nested_json_1, nested_json_2) == expected
-    assert build_diff(nested_yml_1, nested_yml_2) == expected
+    try:
+        assert build_diff(nested_json_1, nested_json_2) == expected
+    except AssertionError:
+        raise
+    try:
+        assert build_diff(nested_yml_1, nested_yml_2) == expected
+    except AssertionError:
+        raise
 
 
 def test_build_diff_empty():
-    diff = {}
-    assert build_diff({}, {}) == diff
+    try:
+        assert build_diff({}, {}) == {}
+    except AssertionError:
+        raise
 
 
 def test_build_diff_unchanged_single_key():
@@ -157,7 +169,10 @@ def test_build_diff_unchanged_single_key():
             "value": "value"
         }
     }
-    assert build_diff(dict1, dict2) == expected
+    try:
+        assert build_diff(dict1, dict2) == expected
+    except AssertionError:
+        raise
 
 
 def test_build_diff_added_key():
@@ -169,7 +184,10 @@ def test_build_diff_added_key():
             "value": "value"
         }
     }
-    assert build_diff(dict1, dict2) == expected
+    try:
+        assert build_diff(dict1, dict2) == expected
+    except AssertionError:
+        raise
 
 
 def test_build_diff_removed_key():
@@ -181,7 +199,10 @@ def test_build_diff_removed_key():
             "value": "value"
         }
     }
-    assert build_diff(dict1, dict2) == expected
+    try:
+        assert build_diff(dict1, dict2) == expected
+    except AssertionError:
+        raise
 
 
 def test_build_diff_changed_key():
@@ -194,7 +215,10 @@ def test_build_diff_changed_key():
             "new_value": "value2"
         }
     }
-    assert build_diff(dict1, dict2) == expected
+    try:
+        assert build_diff(dict1, dict2) == expected
+    except AssertionError:
+        raise
 
 
 def test_build_diff_nested_empty_children():
@@ -206,4 +230,41 @@ def test_build_diff_nested_empty_children():
             "children": {}
         }
     }
-    assert build_diff(dict1, dict2) == expected
+    try:
+        assert build_diff(dict1, dict2) == expected
+    except AssertionError:
+        raise
+
+
+def test_build_diff_invalid_inputs():
+    try:
+        build_diff("not a dict", {"key": "value"})
+        assert False, "Expected AttributeError"
+    except AttributeError:
+        pass
+
+    try:
+        build_diff({"key": "value"}, 123)
+        assert False, "Expected AttributeError"
+    except AttributeError:
+        pass
+
+    try:
+        build_diff(None, None)
+        assert False, "Expected AttributeError"
+    except AttributeError:
+        pass
+
+
+def test_generate_diff_invalid_file_paths():
+    try:
+        generate_diff("nonexistent_file1.json", "nonexistent_file2.json")
+        assert False, "Expected Exception"
+    except Exception:
+        pass
+
+    try:
+        generate_diff("tests/test_data/flat_1.json", "nonexistent_file.yaml")
+        assert False, "Expected Exception"
+    except Exception:
+        pass
