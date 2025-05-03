@@ -22,15 +22,14 @@ def test_empty_file2():
         validate_file_ext("file.json", "")
 
 
-"""# Тесты с путями до файлов
-def test_read_json_file1():
-    path1 = 'tests/fixtures/plane_json_1.json'
-    expected_data = {"key1": "value1"}
-    
-    # Читаем файл и проверяем его содержимое
-    result = read_file(path1)
-    assert result == expected_data  # Ожидаемое содержимое
+def test_case_sensitivity():
+    assert validate_file_ext("file.JSON", "file.YAML") is True
+    assert validate_file_ext("file.Json", "file.Yml") is True
 
-def test_read_json_file2():
-    path2 = 'tests/fixtures/plane_json_2.json'
-    expected_data = {"key2": "value2"}"""
+
+def test_only_extension():
+    with pytest.raises(ValueError):
+        validate_file_ext(".json", "file.yaml")
+        
+    with pytest.raises(ValueError):
+        validate_file_ext("file.json", ".yaml")

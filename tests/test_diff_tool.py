@@ -268,3 +268,11 @@ def test_generate_diff_invalid_file_paths():
         assert False, "Expected Exception"
     except Exception:
         pass
+
+
+def test_generate_diff_non_existent_files():
+    try:
+        generate_diff("nonexistent_file1.json", "nonexistent_file2.json")
+        assert False, "Expected Exception"
+    except Exception:
+        pass

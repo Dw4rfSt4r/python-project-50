@@ -11,6 +11,8 @@ def validate_file_ext(file1, file2):
     if not (file1.lower().endswith(valid_extensions) and 
             file2.lower().endswith(valid_extensions)):
         raise ValueError("Allowed extensions: .json, .yaml, .yml")
+    if file1.startswith(".") or file2.startswith("."):
+        raise ValueError("File paths cannot start with a dot")
     return True
 
 

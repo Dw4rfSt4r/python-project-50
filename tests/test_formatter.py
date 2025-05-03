@@ -243,3 +243,40 @@ def test_format_plain_added_none_value():
     }
     expected_output = "Property 'key' was added with value: null"
     assert format_plain(diff) == expected_output
+
+
+def test_format_plain_deeply_nested():
+    diff = {
+        "level1": {
+            "status": "nested",
+            "children": {
+                "level2": {
+                    "status": "nested",
+                    "children": {
+                        "level3": {
+                            "status": "added",
+                            "value": "deep value"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    expected_output = (
+        "Property 'level1.level2.level3' was added with value: 'deep value'"
+    )
+    assert format_plain(diff) == expected_output
+
+
+def test_format_stylish_special_values():
+    diff = {
+        "float": {"status": "unchanged", "value": 3.14159},
+        "special_chars": {"status": "unchanged", "value": "!@#$%^&*()"}
+    }
+    expected_output = (
+        "{\n"
+        "    float: 3.14159\n"
+        "    special_chars: !@#$%^&*()\n"
+        "}"
+    )
+    assert format_stylish(diff) == expected_output
