@@ -222,3 +222,51 @@ def test_generate_diff_non_existent_files():
         assert False, "Expected Exception"
     except Exception:
         pass
+
+
+def test_build_diff_with_none_values():
+    """Test build_diff with None values."""
+    dict1 = {"key1": None, "key2": "value"}
+    dict2 = {"key1": "value", "key2": None}
+    expected = {
+        "key1": {
+            "status": "changed",
+            "old_value": None,
+            "new_value": "value"
+        },
+        "key2": {
+            "status": "changed",
+            "old_value": "value",
+            "new_value": None
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
+
+
+def test_build_diff_with_boolean_values():
+    """Test build_diff with boolean values."""
+    dict1 = {"key1": True, "key2": False}
+    dict2 = {"key1": False, "key2": True}
+    expected = {
+        "key1": {
+            "status": "changed",
+            "old_value": True,
+            "new_value": False
+        },
+        "key2": {
+            "status": "changed",
+            "old_value": False,
+            "new_value": True
+        }
+    }
+    assert build_diff(dict1, dict2) == expected
+
+
+def test_generate_diff_with_same_files():
+    """Test generate_diff with identical files."""
+    output = generate_diff(
+        "tests/test_data/flat_1.json", 
+        "tests/test_data/flat_1.json"
+    )
+    assert "+" not in output
+    assert "-" not in output
