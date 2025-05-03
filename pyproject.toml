@@ -22,7 +22,7 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["diff_generator"]
+packages = ["gendiff"]
 
 [project.scripts]
-gendiff = "diff_generator.scripts.gendiff:main"
+gendiff = "gendiff.scripts.gendiff:main"
